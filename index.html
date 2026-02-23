@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyTime</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Exemple Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<!-- Page de tableau de board  -->
+
+<body>
+    <!-- Grande div  -->
+  <div class="principal">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i></div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Menu navbar -->
+    <div class="principal_nav">
+      <button class="activ"><a href="./index.html">Tableau de Bord</a></button>
+      <button><a href="./profil.html">Profil</a></button>
+      <button><a href="./myclasses.html">Mes Cours</a></button>
+      <button><a href="./quiz.html">Quiz</a></button>
+      <button><a href="./rattrapage.html">Rattrapages</a></button>
+      <button><a href="./planning.html">Planning</a></button>
+    </div>
+
+    <!-- Blocs -->
+    <div class="blocs_part">
+      <!-- blc1 : Cours Total -->
+       <!-- même nom  de classe (bloc) pour une modif uniforme -->
+      <div class="bloc">
+        <div class="title">Cours Total <span class="icon"><i class="fa-sharp fa-solid fa-chart-simple" style="color: rgb(112, 91, 197);"></i></span></div>
+        <div class="value">0</div>
+        <div class="subtext">
+          <span class="valide">0 validés</span> 
+          <span class="en_cour_de_validation">0 en cours</span> 
+          <span class="echec">0 rattrapages</span>
+        </div>
+      </div>
+
+      <!-- blc2 : Crédits -->
+      <div class="bloc">
+        <div class="title">Crédits <span class="icon"><i class="fa-sharp fa-solid fa-crosshairs" style="color: rgb(112, 91, 197);"></i></span></div>
+        <div class="value">0/0</div>
+        <div class="progress-bar"><span style="width: 0%"></span></div>
+      </div>
+
+      <!-- blc3 : Moyenne Générale -->
+      <div class="bloc">
+        <div class="title">Moyenne Générale <span class="icon"><i class="fa-sharp fa-solid fa-chart-line" style="color: rgb(112, 91, 197);"></i></span></div>
+        <div class="value">-</div>
+        <div class="subtext">Aucune note enregistrée</div>
+      </div>
+
+      <!-- blc4 : Taux de Réussite -->
+      <div class="bloc">
+        <div class="title">Taux de Réussite <span class="icon"><i class="fa-sharp fa-solid fa-medal" style="color: rgb(112, 91, 197);"></i></span></div>
+        <div class="value">0%</div>
+        <div class="subtext">0 cours validés</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

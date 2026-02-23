@@ -1,0 +1,530 @@
+    /* ************************************************************************************************** */
+    /* ************************************************************************************************** */
+    /* Partie commune (base) */
+    /* Reset des marges et paddings par défaut */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+/* Charte graphique */
+:root{
+/*Palette de couleurs*/
+  /* backgrounds */  
+  --bg-main : #0F172A  ;
+  --second-font-color : #334155 ; 
+  /* Couleurs subtext */
+  --accent : #20cae4 ;
+  --success : #108981 ;
+  --failed :#F43F5E ;
+  --warning : #F59E08 ; 
+  /* couleurs de textes  et progress-bar*/
+  --first-text-color : #E2E8F0 ; 
+  --second-text-color : #94A3B8 ;
+  --basic-subtext-color : #8b8484 ;
+  --progress-bar-color : #8b8484 ;
+  --text-mark-color : #a855f7 ;
+
+  /* Fond de bloc */
+  --bloc-font-color : #1E293B ;
+  --bloc-font-bg-hover-color : #33334d ;
+  --rbloc-hover-color : #4343616e ;
+  --rbloc-hover-color :  #c9c1c1 ;
+  --mini-card-bg-hover-color :  #666 ;
+  --classes-bloc-bg-color : #252535 ;
+  /* Couleurs de la nav */
+  --nav-standard-bg-color : #705bc5 ;
+  --nav-hover-bg-color : #33334d ;
+  --nav-active-bg-color : #46acb8 ;
+  /* Couleur Header texts */
+  --header-h1-text-color : #6c63ff ;
+  /* Couleurs icones  */
+  --dashboard-icon-color : #705bc5 ;
+  --brain-icon-color : #e7eb5b ;
+  --bg-icon-color : #a66ddcc4 ; 
+  /* couleurs de button  */
+  --button-standard-bg-color : #6366F1 ;
+  --button-hover-bg-color : #33334d ;
+  --button-revise-color : #3b82f6 ; 
+  /* input color*/
+  --input-bg-color : #1E1E2F ;
+  --input-border-color : #ffffff1a;
+  --input-placeholder-color : #aaa ;
+  --input-submit-bg-color : #6c63ff ;
+  /* progress-bar background color */
+  --progress-bar-bg-color : linear-gradient(90deg, #a855f7, #3b82f6) ;
+}
+
+
+    body {
+      background-color:var(--bg-main); /* Couleur sombre du fond */
+      color: var(--first-text-color);
+    }
+
+    /* Container principal */
+    .principal {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin-left: 10px;
+      color:var(--header-h1-text-color);
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--basic-subtext-color) ;
+      margin-left: 10px;
+    }
+
+    /* Menu de navigation */
+    .principal_nav {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      width : 100%
+    }
+
+    .principal_nav button {
+      padding: 20px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background-color: var(--button-standard-bg-color);
+      transition: 0.3s;
+    }
+
+    .principal_nav button.activ {
+      background-color: var(--accent); 
+      color: var(--second-text-color) ; 
+    }
+     .principal_nav button.activ:hover{
+        background-color : var(--button-hover-bg-color) ;
+        cursor:pointer;    
+     }
+    .principal_nav button:hover {
+      background-color : var(--button-hover-bg-color) ; 
+
+    }
+a {
+  text-decoration: none;
+  color: var(--first-text-color);
+}
+
+/***********************************************************************************************************  */
+/***********************************************************************************************************  */
+/* De sign du tableau de board */
+/* Configuration des blocs */
+    
+    .blocs_part {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .bloc {
+      background-color:var(--bloc-font-color);
+      border-radius: 15px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+      transition: all 0.5s ease-in-out ;
+    }
+    .bloc:hover {
+        cursor : pointer ; 
+        transition: all 0.5s ease-in-out;
+        background-color: var(--bloc-font-bg-hover-color);
+        color: var(--header-h1-text-color);
+    }
+
+    .bloc .title {
+      font-size: 14px;
+      color: var(--basic-subtext-color);
+      margin-bottom: 10px;
+    }
+
+    .bloc .value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .bloc .subtext {
+      font-size: 12px;
+      color:var(--basic-subtext-color) ;
+    }
+
+    /* Couleurs spécifiques pour les sous-textes */
+    .valide {
+      color: var(--success);
+    }
+
+    .en_cour_de_validation {
+      color: var(--warning);
+    }
+
+    .echec {
+      color:var(--failed);
+    }
+
+    /* Icones  */
+    .icon {
+      font-size: 20px;
+      float: right;
+    }
+
+    /* Pour le graphique  */
+    .progress-bar {
+      height: 6px;
+      background-color:var(--progress-bar-color);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 15px;
+      transition : all 0.8s ease-in ;
+    }
+  .progress-bar:hover{
+      background-color: var(--header-h1-text-color);
+  }
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: 3px;
+    }
+/* *********************************************************************************************** */
+/* *********************************************************************************************** */
+/* Design pour la page profil.html */
+
+/* Design du formulaire  */
+div.Formulaire{
+    background-color:var(--bloc-font-color);
+    border-radius: 2% ; 
+    padding : 15px 22px ;
+    gap :10pxpx;
+}
+
+/* Design de la partie avant .begin */
+
+div.begin{
+    background-color:var(--nav-active-bg-color);
+    border: solid 0.3px var(--nav-hover-bg-color) ;
+    border-radius: 10px 10px ;
+    padding : 15px 10px ;
+    margin-bottom : 10px ;
+}
+/* Design des inputs  */
+
+input{
+    width:100% ; 
+    height :50px ;
+    padding :12px 15px ; 
+    background-color : var(--input-bg-color);  
+    border : 1px solid var(--input-border-color) ;
+    border-radius  :10px ; 
+    color : var(--first-text-color) ; 
+    font-size : 15px ;
+    margin-bottom: 10px;
+}
+input::placeholder{
+    color: var(--input-placeholder-color); 
+}
+input:focus{
+    border : 2px solid ; 
+}   
+input:hover{
+  cursor: pointer;
+  transition :all 0.4s ease-in-out
+} 
+
+p.Htext{
+  color: var(--second-text-color);
+}
+
+input#check{
+  background-color:var(--input-submit-bg-color) ;
+  font-weight: 600;
+  color:var(--first-text-color);
+}
+input#check:hover{
+  scale: 0.97;
+}
+
+/****************************************************************************************************  */
+/****************************************************************************************************  */
+/* Design de la partie rattrapage  */
+
+
+div.container_ratrapage{
+  /* background-color: #33334d; */
+  width: 100% ;
+  padding: 10px 15px ;
+  gap : 20px ;
+  min-height : 400px ; 
+}
+
+div.rbloc{
+  border :none;
+  border-radius:5px ;
+  background-color: var(--bloc-font-color);
+  padding: 10px ;
+  margin-bottom: 15px;
+  align-items: center;
+  transition: all 0.7s ease-in ; 
+}
+.warning-icon,.clock-icon{
+  font-size: 18px; 
+}
+span#p_text {
+  position :relative;
+  left: 50px ;
+  top:-25px;
+  margin :0px ; 
+}
+.warning-icon , .clock-icon{
+  width : 40px ;
+  align-items: center;
+  height: 40px;
+  background-color :var(--bg-icon-color); 
+  border-radius :5px ;
+  padding-left : 10px;
+  padding-top: 7px; 
+  padding-right: 6px ;
+  margin-left : 0px ; 
+}
+.rbloc p{
+  text-align :center ; 
+  color: var(--header-h1-text-color);
+  font-weight: bold;
+}
+.rbloc:hover{
+  background-color: var(--input-placeholder-color);
+}
+ div.add div.rbloc:hover{
+  cursor : pointer;
+  background-color:var(--rbloc-hover-color);
+  scale : 0.975;
+}
+
+div.rattr_min_bloc{
+  display: grid ;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap : 15px ;
+}
+
+div.part1{
+  border: solid 0.3px var(--input-border-color) ;
+  padding : 15px; 
+  padding-bottom: 0px;
+  width: 100%;
+  border-radius: 6px;
+
+}
+div.part1 h2 {
+  position: relative ; 
+  top : -23px;
+  left:20px ; 
+  font-size:1.2em ;
+  margin-bottom: 0px;
+  font-weight: normal;  
+}
+div.part2{
+  border: solid 0.3px var(--input-border-color) ;
+  padding : 15px; 
+  padding-bottom: 0px;
+  margin-bottom :15px;
+  width: 100%;
+  border-radius: 6px ; 
+  min-height : 90px ;
+
+  text-align :center ;
+}
+div.part2 p.subtext{
+  font-size: 0.8rem;
+  color: var(--second-text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position:relative ;
+  top : 20px ;
+}
+div.part2:hover{cursor : pointer;}
+
+/**************************************************************************************************  */
+/**************************************************************************************************  */
+/* Partie quiz  */
+
+
+.quiz_section {
+  background-color:var(--bloc-font-color);
+  border-radius: 16px;
+  padding: 40px;
+  min-height : 300px ;
+}
+.small-brain-icon{
+  font-size : 25px ;
+
+}
+div.Title span.quiz_text {
+  position : relative ;
+  left :4.5% ;
+  top : -30px; 
+  font-size : 1.3rem; 
+  margin-left :20px ;
+}
+.big-brain-icon{
+  font-size :80px ;
+  text-align: center;
+  margin-top : 15px;
+  margin-bottom: 55px;
+}
+
+h3.subtext{
+  text-align : center ;
+}
+
+.quiz-title h2 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.quiz-button {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 15px; 
+  justify-content: center;
+}
+
+.quiz-button button {
+  background-color:var(--button-standard-bg-color);
+  border: none;
+  color:var(--first-text-color);
+  margin: 5px;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.6s ease-in-out ;
+}
+
+.quiz-button button:hover {
+  background-color: var(--bloc-font-bg-hover-color);
+}
+
+/*************************************************************************************************  */
+/*************************************************************************************************  */
+/* Design de la partie Mes cours  */
+
+/* 1. L'ALIGNEMENT DES CASES */
+.top-bar { 
+    display: flex;         /* Met les éléments en rang */
+    gap: 15px;             /* Espacer les cases */
+    margin-bottom: 40px; 
+    justify-content: space-between; 
+}
+
+.mini-card { 
+    background:var(--bloc-font-color); 
+    padding: 15px 25px; 
+    border-radius: 12px; 
+    border: 1px solid var(--input-border-color); 
+    flex: 1;              /* les 3 cartes à avoir la même largeur sinon il y a pas l'Homme */
+    text-align: center;
+    transition :all 0.4s ease-in ; 
+}
+.mini-card:hover{
+  cursor :pointer;
+  background-color: var(--mini-card-bg-hover-color) ;
+}
+
+.mini-card strong { 
+  font-size: 1.4rem;
+  display: block;
+  color: var(--bg-icon-color); 
+  }
+.mini-card span {
+   color: var(--first-text-color); 
+   font-size: 0.8rem;
+   }
+
+/* 2. STYLE DES BLOCS DE COURS */
+.bloc-matiere {
+    background: var(--classes-bloc-bg-color); 
+    padding: 20px; 
+    border-radius: 18px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 15px; 
+    border: 1px solid #252535;
+}
+
+.next { 
+  color: var(--second-text-color);
+   font-size: 0.85rem; 
+   display: block;
+    margin-top: 5px;
+   }
+
+/* La barre de progression AMEN */
+.barre-prog { 
+  background: var(--bloc-font-bg-hover-color);
+   height: 8px;
+   border-radius: 10px;
+   width: 250px;
+   overflow: hidden;
+   margin-top: 10px; 
+}
+.remplissage { 
+  height: 100%;
+  background: var(--progress-bar-bg-color);
+ }
+
+/* et les  boutons */
+.data { 
+  text-align: right;
+ }
+.note { 
+  font-size: 2rem;
+   font-weight: bold;
+   color: var(--text-mark-color);
+   display: block;
+ }
+.btn-info, .btn-go { 
+  padding: 8px 12px; 
+  border-radius: 8px; 
+  border: none; 
+  cursor: pointer;
+   margin-top: 10px; 
+}
+.btn-info { 
+  background: #252535;
+   color: var(--button-standard-bg-color); 
+}
+.btn-go { 
+  background: var(--button-revise-color);
+   color: var(--bloc-font-color);
+ }
+
+.main-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px; /* Pour laisser respirer avant les stats */
+    color:var(--bloc-font-color);
+    padding-left: 5px;   /* Petit alignement avec les cartes */
+}
+div.box-conseil{
+  color: var(--header-h1-text-color);
+}

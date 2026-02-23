@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My classes of StudyTime </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+      <!-- Grande div  -->
+  <div class="principal">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i></div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Menu navbar -->
+    <div class="principal_nav">
+      <button ><a href="./index.html">Tableau de Bord</a></button>
+      <button ><a href="./profil.html">Profil</a></button>
+      <button class="activ" ><a href="./myclasses.html">Mes Cours</a></button>
+      <button><a href="./quiz.html">Quiz</a></button>
+      <button ><a href="./rattrapage.html">Rattrapages</a></button>
+      <button><a href="./planning.html">Planning</a></button>
+    </div>   
+
+    <section class="mes-cours">
+        <h1 class="main-title">Mes Cours</h1>
+        <div class="top-bar">
+            <div class="mini-card"><strong>2</strong> <span>Cours</span></div>
+            <div class="mini-card"><strong>10</strong> <span>Crédits</span></div>
+            <div class="mini-card glow"><strong>15.3</strong> <span>Moyenne</span></div>
+        </div>
+
+        <div class="bloc-matiere">
+            <div class="info">
+                <h3>Topologie</h3>
+                <span class="next">Prochain cours : Mardi 10h</span>
+                <div class="barre-prog">
+                    <div class="remplissage" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="data">
+                <span class="note"> Note: 16.5</span>
+                <div class="actions">
+                    <button class="btn-info">Détails</button>
+                    <button class="btn-go"><a href="./quiz.html">Réviser</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bloc-matiere">
+            <div class="info">
+                <h3>Administration Linux</h3>
+                <span class="next">Prochain cours: Jeudi 14h</span>
+                <div class="barre-prog">
+                    <div class="remplissage" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div class="data">
+                <span class="note">Note: 14.2</span>
+                <div class="actions">
+                    <button class="btn-info">Détails</button>
+                    <button class="btn-go"><a href="./quiz.html">Réviser</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-conseil">
+            <p> <strong>Conseil : </strong>Ne te relâche pas , t'es sur la bonne lancée ! </p>
+        </div>
+    </section>    
+</body>
+</html>
