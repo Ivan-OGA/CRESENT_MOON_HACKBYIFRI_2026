@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Cours - StudyTime</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="principal">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i>
+      </div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="principal_nav">
+      <button><a href="{{ url_for('home') }}">Tableau de Bord</a></button>
+      <button><a href="{{ url_for('profil') }}">Profil</a></button>
+      <button class="activ"><a href="{{ url_for('myclasses') }}">Mes Cours</a></button>
+      <button><a href="{{ url_for('quiz') }}">Quiz</a></button>
+      <button><a href="{{ url_for('rattrapage') }}">Rattrapages</a></button>
+      <button><a href="{{ url_for('planning') }}">Planning</a></button>      
+    </div>
+
+    <!-- Bouton toggle formulaire -->
+    <button id="toggleForm">Ajouter un cours</button>
+
+    <!-- Formulaire ajout cours -->
+    <form id="coursForm" action="{{ url_for('add_course') }}" method="POST" style="display:none; margin-top:20px;">
+      <input type="text" name="name" placeholder="Nom du cours" required>
+      <input type="number" name="credits" placeholder="Crédits" required>
+      <input type="text" name="next_class" placeholder="Prochaine classe" required>
+      <input type="number" step="0.5" name="grade" placeholder="Note initiale (0-20)" required>
+      <button type="submit" class="add-submit-btn">Ajouter</button>
+    </form>
+
+    <!-- Liste des cours existants -->
+    <h2 class="main-title">Cours existants</h2>
+    <div class="top-bar">
+      {% for course in courses %}
+        <div class="mini-card bloc-matiere" data-grade="{{ course.grade }}">
+          <strong>{{ course.name }}</strong>
+          <span>Crédits : {{ course.credits }}</span>
+          <span>Prochaine classe : {{ course.next_class }}</span>
+          <div class="barre-prog">
+            <div class="remplissage"></div>
+          </div>
+          <span class="note"></span>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

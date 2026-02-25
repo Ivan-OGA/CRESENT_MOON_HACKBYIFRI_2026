@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyTime</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="principal">
+    
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i>
+      </div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="principal_nav">
+      <button class="activ"><a href="{{url_for('home')}}">Tableau de Bord</a></button>
+      <button><a href="{{url_for('profil')}}">Profil</a></button>
+      <button><a href="{{url_for('myclasses')}}">Mes Cours</a></button>
+      <button><a href="{{url_for('quiz')}}">Quiz</a></button>
+      <button><a href="{{url_for('rattrapage')}}">Rattrapages</a></button>
+      <button><a href="{{ url_for('planning') }}">Planning</a></button> 
+    </div>
+
+    <!-- Statistiques -->
+    <div class="blocs_part">
+
+      <!-- Cours total -->
+      <div class="bloc">
+        <div class="title">Cours Total 
+          <span class="icon">
+            <i class="fa-sharp fa-solid fa-chart-simple" style="color: rgb(112, 91, 197);"></i>
+          </span>
+        </div>
+        <div class="value">{{ total_cours }}
+          <div class="subtext">
+            <span class="valide"> - validé</span> 
+            <span class="en_cour_de_validation"> {{ total_cours }} en cours</span> 
+            <span class="echec">- rattrapages</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crédits -->
+      <div class="bloc">
+        <div class="title">Crédits en cours  
+          <span class="icon">
+            <i class="fa-sharp fa-solid fa-location-crosshairs" style="color: rgb(112, 91, 197);"></i>
+          </span>
+        </div>
+        <div class="value">{{ total_credits }}/40
+        <div class="progress-bar">
+          <span style="width: {{ total_credits * 2.5 }}%;"></span>
+        </div>
+      </div>
+      </div>
+
+      <!-- Moyenne générale -->
+      <div class="bloc">
+        <div class="title">Moyenne Génerale  
+          <span class="icon">
+            <i class="fa-solid fa-chart-line" style="color: rgb(112, 91, 197);"></i>
+          </span></div>
+        <div class="value">{{ moyenneG }}
+        <div class="progress-bar">
+          <span style="width: {{ moyenneG * 5 }}%;"></span>
+        </div>
+      </div>
+      </div>
+
+      <!-- Taux de réussite -->
+      <div class="bloc">
+        <div class="title">Verdict
+          <span class="icon">
+            <i class="fa-sharp fa-solid fa-award" style="color: rgb(112, 91, 197);"></i>
+          </span></div>
+        <div class="value">{{ success_rate }}%
+        <div class="progress-bar">
+          <span style="width: {{ success_rate }}%;"></span>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

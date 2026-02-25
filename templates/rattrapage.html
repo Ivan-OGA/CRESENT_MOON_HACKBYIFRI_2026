@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rattrapage of StudyTime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+      <!-- Grande div  -->
+  <div class="principal">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i></div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Menu navbar -->
+    <div class="principal_nav">
+      <button><a href="{{ url_for('home')}}"">Tableau de Bord</a></button>
+      <button><a href="{{ url_for('profil') }}">Profil</a></button>
+      <button><a href="{{ url_for('myclasses') }}">Mes Cours</a></button>
+      <button><a href="{{ url_for('quiz') }}">Quiz</a></button>
+      <button class = "activ"><a href="{{ url_for('rattrapage') }}">Rattrapages</a></button>
+      <button><a href="{{ url_for('planning') }}">Planning</a></button> 
+    </div>    
+
+<div class="container_ratrapage">
+
+    <div class="rattr_min_bloc">
+        <div class="rbloc">
+            <div class="warning-icon"><i class="fa-solid fa-biohazard" style="color: rgb(231, 235, 91);"></i></div>
+            <span id="p_text"> Matière en rattrapage</span>
+            <input type="number" id="rcount" min="0" max="10" value="0" step="1" placeholder="X">
+        </div>
+        <div class="rbloc">
+            <div class="clock-icon"><i class="fa-regular fa-clock" style="color: rgb(231, 235, 91);"></i></div>
+            <span id="p_text"> Heures de révision</span>
+            <input type="time" " id="r_time" placeholder="X h">
+        </div>
+        <div class="add">
+            <div class="rbloc">
+                <p>+</p>
+                <p>Ajouter un rattrapage </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="rliste">
+       <div class="part1">
+        <span><i class="fa-regular fa-bookmark" style="color: rgb(231, 235, 91);"></i></span>
+          <h2>Liste des rattrapages</h2>
+       </div>
+       <div class="formRattrapage">
+    <h3>Ajouter un rattrapage</h3>
+    <div class="configRattrapage">
+        <input type="text" id="courseName" placeholder="Nom de la matière" required>
+        <input type="number" id="revisionHours" placeholder="Heures de révision par jour" min="1" max="10" required>
+    </div>
+    <button class="btnSuccess" onclick="ajouterRattrapage()">Valider</button>
+</div>
+    </div>
+</div>
+<script>
+// Tableau pour stocker les rattrapages
+const rattrapages = [];
+
+// Variable pour le nombre maximal de matières à rattraper
+let maxMatières = 0;
+
+// Fonction pour fixer le nombre maximal
+function setMaxMatières() {
+    maxMatières = parseInt(document.getElementById('rcount').value, 10);
+    if (isNaN(maxMatières) || maxMatières <= 0) {
+        alert("Veuillez entrer un nombre valide de matières à rattraper.");
+    }
+    updateRattrapageList();
+}
+
+// Fonction pour ajouter un rattrapage
+function ajouterRattrapage() {
+    const matiere = document.getElementById('courseName').value;
+    const heures = document.getElementById('revisionHours').value;
+    if (!matiere || !heures) {
+        alert('Complétez tous les champs avant d’ajouter.');
+        return;
+    }
+
+    if (rattrapages.length >= maxMatières) {
+        alert('Le nombre de matières à rattraper est atteint.');
+        return;
+    }
+
+    const credits = prompt('Combien de crédits pour cette matière ?', '3');
+    rattrapages.push({
+        matiere: matiere,
+        credits: credits,
+        heures: heures
+    });
+
+    document.getElementById('courseName').value = '';
+    document.getElementById('revisionHours').value = '';
+
+    updateRattrapageList();
+}
+
+// Fonction pour afficher la liste des rattrapages
+function updateRattrapageList() {
+    const rattrapageListe = document.querySelector('.rliste .part2');
+    rattrapageListe.innerHTML = '';
+
+    if (rattrapages.length === 0) {
+        rattrapageListe.innerHTML = '<p class="subtext">Aucun rattrapage en cours</p>';
+    } else {
+        rattrapages.forEach(function(r) {
+            const rBloc = document.createElement('div');
+            rBloc.className = 'rbloc';
+            rBloc.innerHTML = `
+                <div class="warning-icon"><i class="fa-solid fa-biohazard" style="color: rgb(231, 235, 91);"></i></div>
+                <span>Matière : ${r.matiere}</span>
+                <span>Crédits : ${r.credits}</span>
+                <span>Heures de révision par jour : ${r.heures}</span>
+            `;
+            rattrapageListe.appendChild(rBloc);
+        });
+    }
+}
+
+// Ajoute l'écouteur pour fixer le max au changement
+document.getElementById('rcount').addEventListener('change', setMaxMatières);
+document.querySelector('.add .rbloc').addEventListener('click', ajouterRattrapage);
+</script>
+</body>
+</html>

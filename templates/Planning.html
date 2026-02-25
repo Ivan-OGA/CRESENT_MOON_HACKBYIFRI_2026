@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil of StudyTime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+      <!-- Grande div  -->
+  <div class="principal">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i></div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Menu navbar -->
+    <div class="principal_nav">
+      <button><a href="{{ url_for('home')}}">Tableau de Bord</a></button>
+      <button><a href="{{url_for('profil')}}">Profil</a></button>
+      <button><a href="{{ url_for('myclasses') }}">Mes Cours</a></button>
+      <button><a href="{{ url_for('quiz') }}">Quiz</a></button>
+      <button><a href="{{ url_for('rattrapage') }}">Rattrapages</a></button>
+      <button class = "activ"><a href="{{ url_for('planning') }}">Planning</a></button>
+    </div>  
+
+<div class="formPlanning">
+
+    <h3>Configurer ma semaine</h3>
+
+    <div class="configGlobal">
+
+    <div class="configItem">
+        <label>🛏 Heure de coucher (chaque jour)</label>
+        <input type="time" id="sleepTime">
+    </div>
+
+    <div class="configItem">
+        <label>⏰ Heure de réveil (chaque jour)</label>
+        <input type="time" id="wakeTime">
+    </div>
+
+    <div class="configItem">
+        <label>📚 Temps total de révision souhaité par jour (en heures)</label>
+        <input type="number" id="revisionHours" min="1" max="10">
+    </div>
+
+</div>
+
+    <button class="btnPrimary" onclick="toggleForm()">+ Ajouter un cours</button>
+
+    <!-- FORMULAIRE CACHÉ -->
+    <div id="courseForm" class="courseForm hidden">
+
+        <select id="daySelect">
+            <option value="0">Lundi</option>
+            <option value="1">Mardi</option>
+            <option value="2">Mercredi</option>
+            <option value="3">Jeudi</option>
+            <option value="4">Vendredi</option>
+            <option value="5">Samedi</option>
+            <option value="6">Dimanche</option>
+        </select>
+
+        <input type="text" id="courseName" placeholder="Nom matière">
+
+        <input type="time" id="startCourse">
+        <input type="time" id="endCourse">
+
+        <select id="typeCourse">
+            <option value="lourd">Matière lourde</option>
+            <option value="leger">Matière légère</option>
+        </select>
+
+        <button class="btnSuccess" onclick="addCourse()">Valider le cours</button>
+    </div>
+
+    <br>
+    <button class="btnGenerate" onclick="generatePlanning()">Générer le planning</button>
+
+    <p id="errorMsg" class="errorMsg"></p>
+
+</div>    
+
+
+<div class="PlanningHebdo">
+    <div class="TitrePrincipale">
+        <h2>📅 Planning Hebdomadaire</h2>
+        <div class="actions">
+            <button>📄 Exporter PDF</button>
+            <button>⚙️ Préférences</button>
+            <button class="Casier3">+ Ajouter</button>
+        </div>
+    </div>
+    <div class="centredesemaine">
+        <div class="semaine">
+            <button>◀</button>
+            <span>23 févr. – 1 mars 2026</span>
+            <button>▶</button>
+        </div>
+        <div class="legend">
+            <span class="coursL">■ Cours</span>
+            <span class="revisionL">■ Révision</span>
+            <span class="reposL">■ Repos</span>
+            <span class="rattrapageL">■ Rattrapage</span>
+        </div>
+    </div>
+    <div class="Calendrier" id="calendrier">
+        <div class="corner"></div>
+        <div class="jour today"><span>Lundi</span><div class="num">23</div></div>
+        <div class="jour"><span>Mardi</span><div class="num">24</div></div>
+        <div class="jour"><span>Mercredi</span><div class="num">25</div></div>
+        <div class="jour"><span>Jeudi</span><div class="num">26</div></div>
+        <div class="jour"><span>Vendredi</span><div class="num">27</div></div>
+        <div class="jour"><span>Samedi</span><div class="num">28</div></div>
+        <div class="jour"><span>Dimanche</span><div class="num">1</div></div>
+    </div>
+</div>
+
+<script>
+
+function getDayName(d){
+    const days = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
+    return days[d];
+}
+
+
+function toggleForm(){
+    const form = document.getElementById("courseForm");
+    form.classList.toggle("hidden");
+}    
+const cal = document.getElementById('calendrier');
+const START = 0;
+const END = 24;
+const H = 60;
+
+let events = [];
+
+function timeToFloat(t){
+    const [h,m] = t.split(":");
+    return parseInt(h) + parseInt(m)/60;
+}
+
+function addCourse(){
+
+    const day = parseInt(document.getElementById("daySelect").value);
+    const name = document.getElementById("courseName").value;
+    const start = document.getElementById("startCourse").value;
+    const end = document.getElementById("endCourse").value;
+    const type = document.getElementById("typeCourse").value;
+
+    if(!name || !start || !end){
+        alert("Remplis tous les champs !");
+        return;
+    }
+
+    const startH = timeToFloat(start);
+    const endH = timeToFloat(end);
+
+    if(endH <= startH){
+        alert("Heure de fin incorrecte !");
+        return;
+    }
+
+    events.push({
+        day: day,
+        startH: startH,
+        endH: endH,
+        title: name,
+        type: "cours",
+        weight: type
+    });
+
+    document.getElementById("courseName").value = "";
+    document.getElementById("startCourse").value = "";
+    document.getElementById("endCourse").value = "";
+
+    alert("Cours ajouté avec succès !");
+}
+
+function generatePlanning(){
+
+    const sleep = document.getElementById("sleepTime").value;
+    const wake = document.getElementById("wakeTime").value;
+    const revisionHours = parseFloat(document.getElementById("revisionHours").value);
+    const errorMsg = document.getElementById("errorMsg");
+
+    if(!sleep || !wake || !revisionHours){
+        errorMsg.textContent = "Complète les paramètres de la semaine.";
+        return;
+    }
+
+    errorMsg.textContent = "";
+
+    let sleepH = timeToFloat(sleep);
+    let wakeH = timeToFloat(wake);
+
+    let sleepDuration;
+
+    if(wakeH > sleepH){
+        sleepDuration = wakeH - sleepH;
+    } else {
+        sleepDuration = (24 - sleepH) + wakeH;
+    }
+
+    // Calcul des heures de cours par jour
+    let hoursPerDay = Array(7).fill(0);
+
+    events.forEach(ev=>{
+        hoursPerDay[ev.day] += (ev.endH - ev.startH);
+    });
+
+    for(let d=0; d<7; d++){
+
+        let total = sleepDuration + revisionHours + hoursPerDay[d];
+
+        if(total > 24){
+            errorMsg.textContent =
+            "Le jour " + getDayName(d) +
+            " dépasse 24h (" + total.toFixed(1) + "h). Corrige tes horaires.";
+            return;
+        }
+    }
+
+    generateCalendar();
+    addRevisions(revisionHours);
+}
+
+function generateCalendar(){
+    cal.innerHTML = `
+        <div class="corner"></div>
+        <div class="jour"><span>Lundi</span></div>
+        <div class="jour"><span>Mardi</span></div>
+        <div class="jour"><span>Mercredi</span></div>
+        <div class="jour"><span>Jeudi</span></div>
+        <div class="jour"><span>Vendredi</span></div>
+        <div class="jour"><span>Samedi</span></div>
+        <div class="jour"><span>Dimanche</span></div>
+    `;
+
+    for(let h=START; h<END; h++){
+        const hCell = document.createElement('div');
+        hCell.className='heuredecours';
+        hCell.textContent = String(h).padStart(2,'0')+":00";
+        cal.appendChild(hCell);
+
+        for(let d=0; d<7; d++){
+            const s = document.createElement('div');
+            s.className='slot';
+            s.dataset.day=d;
+            s.dataset.hour=h;
+            cal.appendChild(s);
+        }
+    }
+
+    events.forEach(drawEvent);
+}
+
+function drawEvent(ev){
+    const slots = document.querySelectorAll(`.slot[data-day="${ev.day}"]`);
+    slots.forEach(slot=>{
+        const hour = parseInt(slot.dataset.hour);
+        if(hour >= ev.startH && hour < ev.endH){
+            const div = document.createElement("div");
+            div.className="coursdujour";
+            div.innerHTML = ev.title;
+            slot.appendChild(div);
+        }
+    });
+}
+
+function addRevisions(hours){
+
+    events.forEach(ev=>{
+        if(ev.weight === "lourd"){
+            let revisionStart = ev.endH + 1;
+
+            events.push({
+                day: ev.day,
+                startH: revisionStart,
+                endH: revisionStart + 1,
+                title: "Révision " + ev.title,
+                type: "revision"
+            });
+        }
+    });
+
+    generateCalendar();
+}
+</script>
+</body>
+</html>

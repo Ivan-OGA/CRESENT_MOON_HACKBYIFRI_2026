@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - StudyTime</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="principal">
+
+    <div class="header">
+      <div class="logo">
+        <i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i>
+      </div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <div class="principal_nav">
+      <button><a href="{{ url_for('home')}}">Tableau de Bord</a></button>
+      <button><a href="{{ url_for('profil') }}">Profil</a></button>
+      <button><a href="{{ url_for('myclasses') }}">Mes Cours</a></button>
+      <button class="activ"><a href="{{ url_for('quiz') }}">Quiz</a></button>
+      <button><a href="{{ url_for('rattrapage') }}">Rattrapages</a></button>
+      <button><a href="{{ url_for('planning') }}">Planning</a></button> 
+    </div>  
+
+    <section class="quiz_section">
+        <div class="Title">
+            <div class="small-brain-icon">
+                <i class="fa-solid fa-brain" style="color: rgb(231, 235, 91);"></i>
+            </div>
+            <span class="quiz_text">Mini Quiz</span>
+        </div>
+
+        <h3 class="subtext">Choisissez une matière et testez vos connaissances avec 5 questions aléatoires</h3>
+
+        <!-- Sélection de la matière -->
+        <div class="quiz-button">
+            {% for s in subjects %}
+                <button><a class="quiz-btn" href="{{ url_for('quiz', subject_id=s.id) }}">{{ s.name }}</a></button>
+            {% endfor %}
+        </div>
+
+        {% if questions %}
+        <form method="POST" class="questions_form">
+            <input type="hidden" name="subject_id" value="{{ subject_id }}">
+
+            {% for q in questions %}
+                <div class="question_box">
+                    <p><strong>{{ loop.index }}. {{ q.question_text }}</strong></p>
+                    <label><input class="quiz-input-radio" type="radio" name="question_{{ q.id }}" value="A"> {{ q.option_a }}</label><br>
+                    <label><input class="quiz-input-radio" type="radio" name="question_{{ q.id }}" value="B"> {{ q.option_b }}</label><br>
+                    <label><input class="quiz-input-radio" type="radio" name="question_{{ q.id }}" value="C"> {{ q.option_c }}</label><br>
+                    <label><input class="quiz-input-radio" type="radio" name="question_{{ q.id }}" value="D"> {{ q.option_d }}</label>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="b-submit">Valider</button>
+        </form>
+        {% endif %}
+
+        {% if result %}
+        <div class="result_box">
+            <h3>Résultat</h3>
+            <p>Score : {{ score }} / {{ total }}</p>
+            <p>Note : {{ percentage }} / 20</p>
+            <a href="{{ url_for('quiz') }}">
+                <button>Recommencer</button>
+            </a>
+        </div>
+        {% endif %}
+
+    </section>
+  </div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>  
+</body>
+</html>

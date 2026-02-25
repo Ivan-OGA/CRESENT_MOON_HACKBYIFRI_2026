@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil of StudyTime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+      <!-- Grande div  -->
+  <div class="principal">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo"><i class="fa-solid fa-user-graduate" style="color: rgb(112, 91, 197);"></i></div>
+      <div>
+        <h1>StudyTime</h1>
+        <p>Suivi académique universitaire</p>
+      </div>
+    </div>
+
+    <!-- Menu navbar -->
+    <div class="principal_nav">
+      <button><a href="{{ url_for('home')}}">Tableau de Bord</a></button>
+      <button class = "activ"><a href="{{url_for('profil')}}">Profil</a></button>
+      <button><a href="{{ url_for('myclasses') }}">Mes Cours</a></button>
+      <button><a href="{{ url_for('quiz') }}">Quiz</a></button>
+      <button><a href="{{ url_for('rattrapage') }}">Rattrapages</a></button>     
+      <button><a href="{{ url_for('planning') }}">Planning</a></button>       
+    </div>  
+    <div class="Formulaire">
+        <div class="begin">
+            <span id="icons"> <i class="fa-sharp fa-solid fa-meteor" style="color: rgb(112, 91, 197);"></i> Bienvenue sur StudyTime!</span>
+            
+            <h5>Commencez par créer votre profil étudiant.Ces informations ne seront demandées qu'une seule fois. </h5>
+        </div>
+    <div id="formulaire_profil" {% if profil %} style="display:none" {% endif %}>
+        <form method="POST" action="{{ url_for('profil') }}">
+            <input type="text" name="username" placeholder="Nom et Prénoms" required>
+            <input type="email" name="email" placeholder="@gmail.com" required>
+            <input type="text" name="matricule" placeholder="XXXXXX" required>
+            <input type="text" name="etablissement" placeholder="Nom de l'institut ou de la faculté" required>
+            <input type="text" name="filiere" placeholder="Ex: Licence Informatique" required>
+            <input type="submit" value="Enregistrer">
+        </form>
+    </div>
+
+<!-- Bloc profil -->
+    <div id="bloc_profil" {% if not profil %}style="display:none"{% endif %}>
+        <h3>Mon Profil</h3>
+        <p><strong>Nom :</strong> {{ profil.username }}</p>
+        <p><strong>Email :</strong> {{ profil.email }}</p>
+        <p><strong>Matricule :</strong sty> {{ profil.matricule }}</p>
+        <p><strong>Etablissement :</strong> {{ profil.etablissement }}</p>
+        <p><strong>Filière :</strong> {{ profil.filiere }}</p>
+    </div>      
+</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

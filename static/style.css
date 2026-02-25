@@ -81,6 +81,9 @@
       font-size: 24px;
       margin-left: 10px;
       color:var(--header-h1-text-color);
+      position: relative ;
+      top : 15px ;
+      left: -35px ; 
     }
 
     .header p {
@@ -263,6 +266,23 @@ input#check:hover{
   scale: 0.97;
 }
 
+
+.bloc_profil {
+    border: 2px solid #715BC5;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #f8f8ff;
+}
+
+.bloc_profil h3 {
+    color: #715BC5;
+    margin-bottom: 10px;
+}
+
+.bloc_profil p {
+    margin: 5px 0;
+}
 /****************************************************************************************************  */
 /****************************************************************************************************  */
 /* Design de la partie rattrapage  */
@@ -288,6 +308,39 @@ div.rbloc{
 .warning-icon,.clock-icon{
   font-size: 18px; 
 }
+
+.formRattrapage {
+    margin: 25px 0;
+    padding: 20px;
+    background: #0b1220;
+    border-radius: 12px;
+}
+
+.configRattrapage {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.configRattrapage input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--input-border-color);
+    background: #0f172a;
+    color: white;
+    font-size: 1rem;
+}
+
+.btnSuccess {
+    background: #10b981;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 span#p_text {
   position :relative;
   left: 50px ;
@@ -365,110 +418,260 @@ div.part2:hover{cursor : pointer;}
 /**************************************************************************************************  */
 /* Partie quiz  */
 
-
-.quiz_section {
-  background-color:var(--bloc-font-color);
-  border-radius: 16px;
-  padding: 40px;
-  min-height : 300px ;
+section.quiz_section{
+  background-color: var(--bloc-font-color);
+  border: solid 0.0001px var(--bloc-font-color) ;
+  min-height : 250px ;
+  border-radius: 10px;
 }
 .small-brain-icon{
-  font-size : 25px ;
-
+  margin:10px 10px ;
+  font-size : 25px ; 
 }
-div.Title span.quiz_text {
-  position : relative ;
-  left :4.5% ;
-  top : -30px; 
-  font-size : 1.3rem; 
-  margin-left :20px ;
-}
-.big-brain-icon{
-  font-size :80px ;
+.quiz-button{
+  align-items: center;
   text-align: center;
-  margin-top : 15px;
-  margin-bottom: 55px;
 }
-
-h3.subtext{
-  text-align : center ;
+.quiz-button button{
+  padding: 10px;
+  border: none ;
+  border-radius: 5px;
+  background-color: var(--button-standard-bg-color);
+  margin-bottom : 15px ;
+  transition: all 0.6s ease-in;
 }
-
-.quiz-title h2 {
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-.quiz-button {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 15px; 
-  justify-content: center;
-}
-
-.quiz-button button {
-  background-color:var(--button-standard-bg-color);
-  border: none;
-  color:var(--first-text-color);
-  margin: 5px;
-  padding: 15px 30px;
-  font-size: 16px;
-  border-radius: 12px;
+.quiz-button button:hover{
   cursor: pointer;
-  transition: all 0.6s ease-in-out ;
+  background-color: var(--bloc-font-bg-hover-color);
+  color: var(--second-text-color);
+  scale : 0.989 ;
+}
+h3.subtext{
+  text-align: center ; 
+  margin-bottom : 10px ;
+}
+.quiz_text{
+  position :relative  ;
+  left :6% ; 
+  top :-38px  ;
+  margin-left : 20px ;
 }
 
-.quiz-button button:hover {
+.big-brain-icon{
+  text-align: center;
+  font-size : 55px ;
+  margin-top : 20px ; 
+  margin-bottom :30px ;
+}
+
+h1 {
+    color: var(--first-text-color);
+    text-align: center;
+}
+
+.quiz-question {
+    background-color: var(--bloc-font-color);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+div.question_box label{
+  position: relative;
+  left: 15%;
+}
+
+/* .questions_box label {
+    display: block;
+    margin: 35px 0;
+    cursor: pointer;
+    width : 35px ;
+    position:relative ; 
+    left: 45%;
+} */
+div.question_box label input.quiz-input-radio{
+    border: 1px solid red ;
+    width: 23px;
+    position: relative;
+    top: 20px;
+    left : 50% ;
+}
+
+.options input[type="radio"] {
+    margin-right: 60px;
+    width: 100%;
+    border: 1px solid red ;
+}
+.question_box p strong {
+  margin-left : 30px ;
+  color: var(--button-revise-color);
+  position : relative ;
+  left:25%; 
+  text-decoration: underline;
+}
+.question_box p strong{
+  margin-top : 30px;
+}
+.quiz-submit {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 30px;
+    background-color: var(--header-h1-text-color);
+    color: var(--first-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quiz-submit:hover {
+    background-color: var(--bloc-font-color);
+}
+
+.result_box{
+  background-color: var(--bg-main);
+  min-height: 100px ;
+  text-align: center;
+  color: var(--second-text-color);
+}
+.result_box h3 ,  p ,button {
+  margin-top: 20px;
+  margin-bottom : 20px ;
+}
+.result_box h3 {
+  color : var(--nav-active-bg-color) ;
+  text-decoration: underline;  
+}
+.result_box p{
+  color: var(--failed);
+  font-weight : bold ;
+} 
+button.b-submit{
+  position : relative ; 
+  left: 43%;
+  background-color:var(--bg-main);
+  padding: 20px 58px;
+  position:relative ;
+  text-align: center;
+  align-items: center;
+  color:#EAEAEA;
+  font-size : 16px ; 
+  font-weight: 500;
+  border:none;
+  border-radius: 8px;
+  transition: all 0.7s ease-in;
+}
+button.b-submit:hover{
+  background-color: var(--button-hover-bg-color);
+  color: var(--header-h1-text-color);
+  cursor: pointer;
+}
+
+.result_box button{
+  margin-top: 0px;
+  padding: 8px 9px ;
+  background-color: var(--bloc-font-color);
+  border : none  ;
+  border-radius : 5px ;
+  color: var(--first-text-color);
+  transition : all 0.8s ease-in ; 
+}
+.result_box button:hover {
   background-color: var(--bloc-font-bg-hover-color);
+  cursor : pointer ;
 }
 
 /*************************************************************************************************  */
 /*************************************************************************************************  */
 /* Design de la partie Mes cours  */
 
-/* 1. L'ALIGNEMENT DES CASES */
 .top-bar { 
-    display: flex;         /* Met les éléments en rang */
-    gap: 15px;             /* Espacer les cases */
-    margin-bottom: 40px; 
-    justify-content: space-between; 
+/*  */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px; 
 }
+button.add-submit-btn{
+  padding: 30px 45px ;
+  background-color: var(--classes-bloc-bg-color);
+  border:none ; 
+  font-size: 18px;
+  font-weight: 500 ;
+  border-radius: 8px;
+  color : var(--second-text-color) ;
+  transition :all 0.8s ease-in-out ;
+}
+button.add-submit-btn:hover{
+  background-color: var(--button-standard-bg-color) ;
+  color: var(--bg-main); 
+}
+h2.main-title{color : var(--accent) ;}
 
 .mini-card { 
     background:var(--bloc-font-color); 
     padding: 15px 25px; 
     border-radius: 12px; 
     border: 1px solid var(--input-border-color); 
-    flex: 1;              /* les 3 cartes à avoir la même largeur sinon il y a pas l'Homme */
+    display : inline-block ;  
+    gap : 15px ;
+    margin-right: 30px ;
+    /* les 3 cartes à avoir la même largeur sinon il y a pas l'Homme */
     text-align: center;
     transition :all 0.4s ease-in ; 
 }
+#toggleForm{
+  padding : 25px 55px ;
+  color: var(--header-h1-text-color);
+  background-color: var(--bloc-font-color);
+  border : none ; 
+  border-radius: 10px;
+  font-weight: 500 ;
+  transition:all 0.7s ease-in ;
+
+}
+ #toggleForm:hover{
+  cursor :pointer;
+  background-color: var(--input-submit-bg-color) ;
+  color : var(--first-text-color); ;
+}
 .mini-card:hover{
   cursor :pointer;
-  background-color: var(--mini-card-bg-hover-color) ;
+  background-color: var(--input-submit-bg-color) ;
+  color : var(--bloc-font-color) ;
 }
+
 
 .mini-card strong { 
   font-size: 1.4rem;
   display: block;
   color: var(--bg-icon-color); 
+  margin: 3px;
   }
 .mini-card span {
    color: var(--first-text-color); 
    font-size: 0.8rem;
    }
 
+   .mini-card strong:hover{
+      color: var(--first-text-color);
+   }
+
+
+
 /* 2. STYLE DES BLOCS DE COURS */
 .bloc-matiere {
     background: var(--classes-bloc-bg-color); 
     padding: 20px; 
     border-radius: 18px;
-    display: flex; 
+    max-height: 150px ;
+    /* display: flex;  */
     justify-content: space-between; 
     align-items: center;
     margin-bottom: 15px; 
     border: 1px solid #252535;
+    max-width: 100%;
 }
 
 .next { 
@@ -481,26 +684,40 @@ h3.subtext{
 /* La barre de progression AMEN */
 .barre-prog { 
   background: var(--bloc-font-bg-hover-color);
-   height: 8px;
-   border-radius: 10px;
-   width: 250px;
-   overflow: hidden;
-   margin-top: 10px; 
+  height: 8px;
+  border-radius: 10px;
+  width: 250px;
+  overflow: hidden;
+  margin-top: 10px;
 }
+
 .remplissage { 
+  display: block;
   height: 100%;
-  background: var(--progress-bar-bg-color);
- }
+  width: 0%; /* initial */
+  background: linear-gradient(90deg, #a855f7, #3b82f6);
+  transition: width 0.6s ease-in-out;
+}
 
 /* et les  boutons */
 .data { 
   text-align: right;
+  position: relative ;
+  /* right: -800px; */
+  top : -60px ;
+  /* display: inline-flexbox; */
  }
+ .info{
+  position: relative ;
+  top : 30px ;
+
+}
 .note { 
   font-size: 2rem;
    font-weight: bold;
    color: var(--text-mark-color);
    display: block;
+   justify-content: center;
  }
 .btn-info, .btn-go { 
   padding: 8px 12px; 
@@ -509,6 +726,7 @@ h3.subtext{
   cursor: pointer;
    margin-top: 10px; 
 }
+
 .btn-info { 
   background: #252535;
    color: var(--button-standard-bg-color); 
@@ -527,4 +745,132 @@ h3.subtext{
 }
 div.box-conseil{
   color: var(--header-h1-text-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.navbar { background: #0f172a; padding: 16px 30px; display: flex; justify-content: center; border-bottom: 1px solid #1e293b; }
+.nav-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.nav-links a { text-decoration: none; color: white; padding: 8px 18px; background: #1e293b; border-radius: 8px; font-size: 0.88rem; transition: 0.3s; }
+.nav-links a:hover { background: #334155; }
+.nav-links a.active { background: linear-gradient(135deg, #3b82f6, #06b6d4); box-shadow: 0 4px 15px rgba(59,130,246,0.4); }
+
+.PlanningHebdo { max-width: 1300px; margin: 30px auto; padding: 30px; background: rgba(30,41,59,0.8); backdrop-filter: blur(10px); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+.TitrePrincipale { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.actions { display: flex; gap: 10px; }
+.actions button { background: #1e293b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: 0.3s; }
+.actions button:hover { background: #334155; }
+.Casier3 { background: linear-gradient(135deg, #3b82f6, #06b6d4) !important; }
+
+.centredesemaine { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 20px; }
+.semaine { display: flex; align-items: center; gap: 20px; font-weight: bold; }
+.semaine button { background: #1e293b; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.semaine button:hover { background: #3b82f6; }
+.legend { display: flex; gap: 24px; font-size: 0.85rem; }
+.coursL { color: #3b82f6; } .revisionL { color: #10b981; } .reposL { color: #f59e0b; } .rattrapageL { color: #ef4444; }
+
+.Calendrier { display: grid; grid-template-columns: 70px repeat(7, 1fr); border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; background: #0f172a; position: relative; }
+.corner { background: #0f172a; border-bottom: 2px solid #1e293b; }
+.jour { background: #0f172a; border-bottom: 2px solid #1e293b; border-left: 1px solid #1e293b; display: flex; flex-direction: column; align-items: center; padding: 10px 0; font-size: 0.85rem; color: #94a3b8; }
+.jour .num { font-size: 1.3rem; font-weight: bold; color: white; margin-top: 2px; }
+.jour.today .num { background: #3b82f6; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.heuredecours { background: #0f172a; border-right: 1px solid #1e293b; border-bottom: 1px solid #1e293b; display: flex; align-items: flex-start; justify-content: center; padding-top: 6px; font-size: 0.72rem; color: #475569; height: 60px; }
+.slot { background: #0b1220; border-bottom: 1px solid #1e293b; border-left: 1px solid #1e293b; height: 60px; }
+.coursdujour { background: linear-gradient(135deg, #2563eb, #3b82f6); border-radius: 10px; padding: 8px; font-size: 0.8rem; box-shadow: 0 8px 20px rgba(37,99,235,0.4); }
+
+
+.configItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+
+.formPlanning {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #0b1220;
+    border-radius: 12px;
+}
+
+.configGlobal {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.formPlanning input,
+.formPlanning select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    background: #0f172a;
+    color: white;
+}
+
+.btnPrimary {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btnPrimary:hover {
+    transform: scale(1.05);
+}
+
+.btnSuccess {
+    background: #10b981;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.btnGenerate {
+    background: #f59e0b;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.courseForm {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}
+
+.errorMsg {
+    color: #ef4444;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
